@@ -1,15 +1,14 @@
-from nonebot import on_command, CommandSession
-from config import word_cloud_groups, SUPERUSERS
-from nonebot import on_natural_language, NLPSession, IntentCommand
-import nonebot
-from datetime import date
-from os.path import exists
-from os import mkdir, getcwd
-from create_word_cloud import gen
 import asyncio
+from datetime import date
+from os import mkdir, getcwd
+from os.path import exists
 
-__plugin_name__ = 'word_cloud'
-__plugin_usage__ = '【被动】记录聊天记录，定时生成词云并发送'
+import nonebot
+from nonebot import on_command, CommandSession
+from nonebot import on_natural_language, NLPSession, IntentCommand
+
+from config import word_cloud_groups, SUPERUSERS
+from create_word_cloud import gen
 
 
 @on_command('add_log')

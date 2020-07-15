@@ -1,10 +1,9 @@
-from nonebot import on_command, CommandSession
-from config import group_white_list, user_white_list
-from ast import literal_eval
 import re
+from ast import literal_eval
 
-__plugin_name__ = 'echo'
-__plugin_usage__ = '命令【echo】：带任意参数，直接复读\n命令【print】：带任意参数，对参数求值后复读，求值按照python语法'
+from nonebot import on_command, CommandSession
+
+from config import group_white_list, user_white_list
 
 
 @on_command('echo')

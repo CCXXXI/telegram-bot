@@ -1,11 +1,10 @@
 import asyncio
 from os import getcwd, listdir
 from random import choice
-import nonebot
-from config import group_white_list
 
-__plugin_name__ = 'img_daily'
-__plugin_usage__ = '【被动】每日色图'
+import nonebot
+
+from config import group_white_list
 
 
 @nonebot.scheduler.scheduled_job('cron', hour=10)

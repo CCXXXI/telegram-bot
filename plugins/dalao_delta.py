@@ -1,10 +1,8 @@
-from nonebot import on_notice, NoticeSession
-from nonebot import get_bot
 from aiocqhttp import Event
-from config import dalao_delta_groups
+from nonebot import get_bot
+from nonebot import on_notice, NoticeSession
 
-__plugin_name__ = 'dalao_delta'
-__plugin_usage__ = '【被动】定期检查群人数是否变化，变化则发送信息'
+from config import dalao_delta_groups
 
 bot = get_bot()
 dalao_delta_nums = dict()

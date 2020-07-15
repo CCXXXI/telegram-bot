@@ -1,17 +1,12 @@
-import nonebot
 from nonebot import on_command, CommandSession
 
-__plugin_name__ = 'help'
-__plugin_usage__ = '命令【help】：不带参数则发送插件列表，否则发送参数对应插件的文档'
+from config import group_white_list, user_white_list
 
 
 @on_command('help')
 async def show_help(session: CommandSession):
-    plugins = list(filter(lambda p: p.name, nonebot.get_loaded_plugins()))
-    arg = session.current_arg_text.strip().lower()
-    if not arg:
-        await session.send('插件列表：\n' + '\n'.join(p.name for p in plugins))
-        return
-    for p in plugins:
-        if p.name.lower() == arg:
-            await session.send(p.usage)
+    if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
+        await session.send(
+            '插件列表：https://github.com/CCXXXI/qq_bot/tree/master/plugins')
+    else:
+        print('来源不明，pass')

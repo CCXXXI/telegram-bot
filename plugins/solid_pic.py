@@ -1,11 +1,10 @@
-from nonebot import on_command, CommandSession
-from config import group_white_list, user_white_list
-from PIL import Image
-from random import randint
 from os import getcwd
+from random import randint
 
-__plugin_name__ = 'solid_pic'
-__plugin_usage__ = '命令【纯色图】：发送随机纯色图片，无可选参数'
+from PIL import Image
+from nonebot import on_command, CommandSession
+
+from config import group_white_list, user_white_list
 
 
 def rd():
