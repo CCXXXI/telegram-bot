@@ -19,9 +19,12 @@ async def add_log_caller(session: CommandSession):
         add_log(session.current_arg_text, 0)
 
 
+msg_filter_list = ['[CQ:', '/', '请使用新版手机QQ']
+
+
 @on_natural_language(only_to_me=False)
 async def catch_all_msg(session: NLPSession):
-    if '[CQ:' not in session.msg and '/' not in session.msg:
+    if all(x not in session.msg for x in msg_filter_list):
         return IntentCommand(99.9, 'add_log', current_arg=session.msg)
 
 
