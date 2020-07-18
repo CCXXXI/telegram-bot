@@ -9,14 +9,11 @@ import numpy as np
 import pandas
 from wordcloud import WordCloud, ImageColorGenerator
 
+from json_tool import get_conf
+
 stopwords_filename = 'word_cloud/stopwords.txt'
 font_filename = 'word_cloud/font.ttf'
 template_filename = 'word_cloud/template.png'
-
-
-def get_seed():
-    with open('word_cloud_seed.txt') as seed_file:
-        return int(seed_file.readline())
 
 
 def gen(input_filename):
@@ -49,7 +46,7 @@ def gen(input_filename):
 
     if isfile(template_filename):
         b_img = imageio.imread(template_filename)
-        seed = get_seed()
+        seed = get_conf('random_seed')
         print(f'{seed=}')
         word_cloud = WordCloud(
             font_path=font_filename,
