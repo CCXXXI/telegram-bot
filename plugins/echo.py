@@ -14,7 +14,7 @@ async def echo(session: CommandSession):
         print('来源不明，pass')
 
 
-@on_command('print')
+@on_command('print', aliases=('exec', 'eval'))
 async def py_print(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
         await session.send(safe_eval(session.current_arg_text))
