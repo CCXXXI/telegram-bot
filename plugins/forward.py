@@ -10,8 +10,8 @@ async def exec_forward(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
         # noinspection PyTypeChecker
         ret: dict = await session.send(f'/exec {session.current_arg_text}')
-        await asyncio.sleep(1)
-        await session.bot.delete_msg(message_id=ret['message_id'])
+        # await asyncio.sleep(1)
+        # await session.bot.delete_msg(message_id=ret['message_id'])
     else:
         print('来源不明，pass')
 
@@ -21,7 +21,7 @@ async def gkd_forward(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
         # noinspection PyTypeChecker
         ret: dict = await session.send('/不色的图')
-        await asyncio.sleep(1)
-        await session.bot.delete_msg(message_id=ret['message_id'])
+        # await asyncio.sleep(3)
+        # await session.bot.delete_msg(message_id=ret['message_id'])
     else:
         print('来源不明，pass')
