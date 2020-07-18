@@ -7,7 +7,7 @@ import nonebot
 from config import group_white_list
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=10)
+@nonebot.scheduler.scheduled_job('cron', hour=10, minute=0)
 async def img_daily_caller():
     await img_daily()
 
