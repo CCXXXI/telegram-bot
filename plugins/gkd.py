@@ -57,5 +57,5 @@ async def gkd_forward(session: CommandSession):
 
 
 async def gkd_api(session: CommandSession):
-    msg = f'[CQ:image,file=https://api.yoshino-s.online/random]'
+    msg = f'[CQ:image,cache=0,file=https://api.yoshino-s.online/random]'
     await session.send(msg)
