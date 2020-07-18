@@ -18,7 +18,7 @@ def set_conf(name: str, value):
         conf: dict = json.load(f)
     conf[name] = value
     with open('config.json', 'w') as f:
-        f.write(json.dumps(conf))
+        f.write(json.dumps(conf) + '\n')
 
 
 test_conf()
