@@ -21,6 +21,5 @@ def set_conf(name: str, value):
         f.write(json.dumps(conf) + '\n')
 
 
-test_conf()
 if __name__ == '__main__':
-    pass
+    test_conf()

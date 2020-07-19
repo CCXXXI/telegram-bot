@@ -21,7 +21,3 @@ async def img_daily():
         await asyncio.sleep(10)
         await bot.send_group_msg(
             group_id=gid, message=f'早安\n[CQ:image,file=file:///{img_path}]')
-
-
-test_img_path = getcwd() + rf"\img_daily\{choice(listdir('img_daily'))}"
-print(f'{test_img_path=}')

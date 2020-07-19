@@ -52,12 +52,11 @@ async def gen_and_send():
             with open(f'{log_dir}/{gid}.txt', encoding='utf-8') as f:
                 for _ in f:
                     line_cnt += 1
-            if line_cnt > 10:
+            if line_cnt > 30:
                 gen(f'{log_dir}/{gid}.txt')
                 to_send = text + rf'[CQ:image,file=file:///{full_dir}\{gid}.png]'
-                await bot.send_group_msg(group_id=gid, message=to_send)
+            else:
+                to_send = '今日无事'
+            await bot.send_group_msg(group_id=gid, message=to_send)
         except FileNotFoundError as e:
             print(e.args, e.filename)
-
-
-print('词云目录：', getcwd() + rf'\word_cloud\{str(date.today())}')
