@@ -5,7 +5,7 @@ from random import choice
 from nonebot import on_command, CommandSession
 
 from config import group_white_list, user_white_list
-from json_tool import get_conf, set_conf
+from json_tools import get_conf, set_conf
 
 
 class GkdMode(IntEnum):

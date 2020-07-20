@@ -9,7 +9,7 @@ import numpy as np
 import pandas
 from wordcloud import WordCloud, ImageColorGenerator
 
-from json_tool import get_conf
+from json_tools import get_conf
 
 stopwords_filename = 'word_cloud/stopwords.txt'
 font_filename = 'word_cloud/font.ttf'
