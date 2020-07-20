@@ -11,7 +11,6 @@ from json_tool import get_conf, set_conf
 class GkdMode(IntEnum):
     local = auto()
     forward = auto()
-    api = auto()
 
 
 valid_gkd_mode = GkdMode.__members__.keys()
@@ -37,7 +36,6 @@ async def gkd_caller(session: CommandSession):
         func_map = {
             GkdMode.local: gkd_local,
             GkdMode.forward: gkd_forward,
-            GkdMode.api: gkd_api,
         }
         await func_map[gkd_mode](session)
     else:
@@ -54,8 +52,3 @@ async def gkd_local(session: CommandSession):
 
 async def gkd_forward(session: CommandSession):
     await session.send('/不色的图')
-
-
-async def gkd_api(session: CommandSession):
-    msg = f'[CQ:image,cache=0,file=https://api.yoshino-s.online/random]'
-    await session.send(msg)
