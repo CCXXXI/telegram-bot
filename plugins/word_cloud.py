@@ -19,7 +19,7 @@ async def add_log_caller(session: CommandSession):
         add_log(session.current_arg_text, 0)
 
 
-msg_filter_list = ['[CQ:', '/', '请使用新版手机QQ']
+msg_filter_list = ['[CQ:', '/', '请使用新版手机QQ', '你的QQ暂不支持']
 
 
 @on_natural_language(only_to_me=False)

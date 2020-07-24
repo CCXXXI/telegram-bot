@@ -4,15 +4,7 @@ from ast import literal_eval
 from nonebot import on_command, CommandSession
 
 from config import group_white_list, user_white_list
-from safe_eval import safe_eval
-
-
-@on_command('real_eval')
-async def py_eval(session: CommandSession):
-    if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        await session.send(safe_eval(session.current_arg_text))
-    else:
-        print('来源不明，pass')
+from safe_exec import safe_exec
 
 
 @on_command('echo')
@@ -23,15 +15,23 @@ async def echo(session: CommandSession):
         print('来源不明，pass')
 
 
-@on_command('print', aliases=('exec', 'eval'))
-async def py_print(session: CommandSession):
+@on_command('eval')
+async def safe_eval_caller(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        await session.send(restricted_eval(session.current_arg_text))
+        await session.send(safe_eval(session.current_arg_text))
     else:
         print('来源不明，pass')
 
 
-def restricted_eval(x: str):
+@on_command('exec')
+async def safe_exec_caller(session: CommandSession):
+    if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
+        await session.send(safe_exec(session.current_arg_text))
+    else:
+        print('来源不明，pass')
+
+
+def safe_eval(x: str):
     if len(x) > 100:
         return '太长啦'
     try:
@@ -62,4 +62,4 @@ def restricted_eval(x: str):
 
 if __name__ == '__main__':
     while True:
-        print(restricted_eval(input()))
+        print(safe_eval(input()))
