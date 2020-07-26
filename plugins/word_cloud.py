@@ -25,7 +25,7 @@ msg_filter_list = ['[CQ:', '/', '请使用新版手机QQ', '你的QQ暂不支持
 @on_natural_language(only_to_me=False)
 async def catch_all_msg(session: NLPSession):
     if all(x not in session.msg for x in msg_filter_list):
-        return IntentCommand(99.9, 'add_log', current_arg=session.msg)
+        return IntentCommand(70, 'add_log', current_arg=session.msg)
 
 
 def add_log(msg: str, gid: int):
@@ -36,7 +36,10 @@ def add_log(msg: str, gid: int):
         f.write(msg + '\n')
 
 
-@nonebot.scheduler.scheduled_job('cron', hour=23, minute=55)
+@nonebot.scheduler.scheduled_job('cron',
+                                 hour=23,
+                                 minute=55,
+                                 misfire_grace_time=10)
 async def gen_and_send_caller():
     await gen_and_send()
 
