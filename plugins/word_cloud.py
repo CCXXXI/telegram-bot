@@ -8,24 +8,22 @@ from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 
 from config import word_cloud_groups, SUPERUSERS
-from create_word_cloud import gen
+from word_cloud_tools import gen_word_cloud
 
-
-@on_command('add_log')
-async def add_log_caller(session: CommandSession):
-    if (gid := session.event.group_id) in word_cloud_groups:
-        add_log(session.current_arg_text, gid)
-    elif session.event.user_id in SUPERUSERS:
-        add_log(session.current_arg_text, 0)
-
-
-msg_filter_list = ['[CQ:', '/', '请使用新版手机QQ', '你的QQ暂不支持']
+msg_black_list = ['[CQ:', '/', '请使用新版手机QQ', '你的QQ暂不支持']
 
 
 @on_natural_language(only_to_me=False)
 async def catch_all_msg(session: NLPSession):
-    if all(x not in session.msg for x in msg_filter_list):
-        return IntentCommand(70, 'add_log', current_arg=session.msg)
+    return IntentCommand(60, 'add_log', current_arg=session.msg)
+
+
+@on_command('add_log')
+async def add_log_caller(session: CommandSession):
+    gid, msg = session.event.group_id, session.current_arg_text.strip()
+    if gid in word_cloud_groups and len(msg) > 1\
+            and all(s not in msg for s in msg_black_list):
+        add_log(msg, gid)
 
 
 def add_log(msg: str, gid: int):
@@ -49,17 +47,17 @@ async def gen_and_send():
     full_dir = getcwd() + rf'\word_cloud\{str(date.today())}'
     bot = nonebot.get_bot()
     for gid, text in word_cloud_groups.items():
-        await asyncio.sleep(10)
         try:
             line_cnt = 0
             with open(f'{log_dir}/{gid}.txt', encoding='utf-8') as f:
                 for _ in f:
                     line_cnt += 1
             if line_cnt > 30:
-                gen(f'{log_dir}/{gid}.txt')
+                gen_word_cloud(f'{log_dir}/{gid}.txt')
                 to_send = text + rf'[CQ:image,file=file:///{full_dir}\{gid}.png]'
             else:
                 to_send = '今日无事'
             await bot.send_group_msg(group_id=gid, message=to_send)
+            await asyncio.sleep(10)
         except FileNotFoundError as e:
             print(e.args, e.filename)

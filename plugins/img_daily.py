@@ -21,6 +21,6 @@ async def img_daily():
     img_path = getcwd() + rf'\img_daily\{img_name}'
     print(f'{img_path=}')
     for gid in group_white_list:
-        await asyncio.sleep(10)
         await bot.send_group_msg(
             group_id=gid, message=f'早安\n[CQ:image,file=file:///{img_path}]')
+        await asyncio.sleep(10)
