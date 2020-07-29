@@ -7,10 +7,14 @@ from config import group_white_list, user_white_list
 from safe_exec import safe_exec
 
 
+def he_xie(s: str):
+    return s.replace('CQ', '??')
+
+
 @on_command('echo')
 async def echo(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        await session.send(session.current_arg_text)
+        await session.send(he_xie(session.current_arg_text))
     else:
         print('来源不明，pass')
 
@@ -18,7 +22,7 @@ async def echo(session: CommandSession):
 @on_command('eval')
 async def safe_eval_caller(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        await session.send(safe_eval(session.current_arg_text))
+        await session.send(he_xie(safe_eval(session.current_arg_text)))
     else:
         print('来源不明，pass')
 
@@ -26,7 +30,7 @@ async def safe_eval_caller(session: CommandSession):
 @on_command('exec')
 async def safe_exec_caller(session: CommandSession):
     if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        await session.send(safe_exec(session.current_arg_text))
+        await session.send(he_xie(safe_exec(session.current_arg_text)))
     else:
         print('来源不明，pass')
 

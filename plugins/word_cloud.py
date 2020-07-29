@@ -7,10 +7,10 @@ import nonebot
 from nonebot import on_command, CommandSession
 from nonebot import on_natural_language, NLPSession, IntentCommand
 
-from config import word_cloud_groups, SUPERUSERS
+from config import word_cloud_groups
 from word_cloud_tools import gen_word_cloud
 
-msg_black_list = ['[CQ:', '/', '请使用新版手机QQ', '你的QQ暂不支持']
+stop_words = ['[CQ:', '/', '请使用新版手机QQ', '你的QQ暂不支持']
 
 
 @on_natural_language(only_to_me=False)
@@ -21,8 +21,8 @@ async def catch_all_msg(session: NLPSession):
 @on_command('add_log')
 async def add_log_caller(session: CommandSession):
     gid, msg = session.event.group_id, session.current_arg_text.strip()
-    if gid in word_cloud_groups and len(msg) > 1\
-            and all(s not in msg for s in msg_black_list):
+    if gid in word_cloud_groups and len(msg) > 1 \
+            and all(s not in msg for s in stop_words):
         add_log(msg, gid)
 
 
