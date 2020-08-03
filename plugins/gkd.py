@@ -13,8 +13,8 @@ local_img_path = 'images/'
 @on_cmd
 def gkd(update: Update, context: CallbackContext):
     if context.args:
-        api: str = img_api_list[hash(tuple(context.args)) % len(img_api_list)]
-        update.message.reply_photo(api)
+        api = img_api_list[hash(tuple(context.args)) % len(img_api_list)]
+        update.message.reply_photo(api.get())
     else:
         img_path = local_img_path + choice(listdir(local_img_path))
         update.message.reply_photo(open(img_path, 'rb'))
