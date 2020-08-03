@@ -1,37 +1,21 @@
 import re
 from ast import literal_eval
 
-from nonebot import on_command, CommandSession
+from telegram import Update
+from telegram.ext import CallbackContext
 
-from config import SUPERUSERS
-from safe_exec import safe_exec
-
-
-@on_command('echo')
-async def echo(session: CommandSession):
-    if session.event.user_id in SUPERUSERS:
-        await session.send(session.current_arg_text)
-    else:
-        print('来源不明，pass')
+from cmd_tools import str_arg
+from plugin_tools import on_cmd
 
 
-@on_command('eval')
-async def safe_eval_caller(session: CommandSession):
-    if session.event.user_id in SUPERUSERS:
-        await session.send(safe_eval(session.current_arg_text))
-    else:
-        print('来源不明，pass')
+# noinspection PyUnusedLocal
+@on_cmd
+def eval_(update: Update, context: CallbackContext):
+    t = str_arg(update)
+    update.message.reply_text(safe_eval(t) if t else '?')
 
 
-@on_command('exec')
-async def safe_exec_caller(session: CommandSession):
-    if session.event.user_id in SUPERUSERS:
-        await session.send(safe_exec(session.current_arg_text))
-    else:
-        print('来源不明，pass')
-
-
-def safe_eval(x: str):
+def safe_eval(x: str) -> str:
     if len(x) > 100:
         return '太长啦'
     try:
@@ -58,8 +42,3 @@ def safe_eval(x: str):
         return 'invalid syntax'
     except TypeError as te:
         return te.args[0]
-
-
-if __name__ == '__main__':
-    while True:
-        print(safe_eval(input()))
