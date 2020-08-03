@@ -17,7 +17,7 @@ def exec_(update: Update, context: CallbackContext):
 
 
 def safe_exec(s: str) -> str:
-    ret = requests.get(safe_exec_api + s)
+    ret = requests.post(safe_exec_api, data=s)
     if ret.status_code == 200 and ret.text:
         return ret.text
     return '?'
