@@ -12,7 +12,9 @@ from plugin_tools import on_cmd
 @on_cmd
 def eval_(update: Update, context: CallbackContext):
     t = str_arg(update)
-    update.message.reply_text(safe_eval(t) if t else '?')
+    t = safe_eval(t) if t else '?'
+    t = t if t else '?'
+    update.message.reply_text(t)
 
 
 def safe_eval(x: str) -> str:
