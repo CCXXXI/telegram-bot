@@ -16,4 +16,5 @@ def on_cmd(func):
 def load_plugins():
     """遍历import所有plugins，以生成cmd_list"""
     for filename in listdir('plugins'):
-        import_module(f'plugins.{filename[:-3]}')
+        if filename.endswith('.py'):
+            import_module(f'plugins.{filename[:-3]}')
