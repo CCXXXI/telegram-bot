@@ -1,4 +1,7 @@
 import unittest
+from os import chdir, pardir
+
+chdir(pardir)
 
 
 class TestPluginTools(unittest.TestCase):
