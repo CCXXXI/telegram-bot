@@ -21,12 +21,12 @@ def gen_solid_pic(args: List[str] = None):
     size = [randint(11, 231) for _ in range(2)]
 
     if args:
-        for i, v in args[:3]:
+        for i, v in enumerate(args[:3]):
             try:
                 color[i] = int(v, base=0) % 255
             except ValueError:
                 continue
-        for i, v in args[3:]:
+        for i, v in enumerate(args[3:]):
             try:
                 size[i] = int(v, base=0) % 220 + 11
             except ValueError:
