@@ -129,6 +129,4 @@ dmypy.json
 
 # other
 config.py
-*.jpg
-*.png
 temp/
