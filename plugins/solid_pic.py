@@ -1,22 +1,36 @@
-from os import getcwd
 from random import randint
+from typing import List
 
 from PIL import Image
-from nonebot import on_command, CommandSession
+from telegram import Update
+from telegram.ext import CallbackContext
 
-from config import group_white_list, user_white_list
+from tools.plugin_tools import on_cmd
+
+solid_pic_path = 'temp/solid_pic.png'
 
 
-def rd():
-    return randint(0, 255)
+@on_cmd
+def solid_pic(update: Update, context: CallbackContext):
+    gen_solid_pic(context.args)
+    update.message.reply_photo(open(solid_pic_path, 'rb'))
 
 
-@on_command('纯色图')
-async def solid_pic_send(session: CommandSession):
-    if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        img = Image.new('RGB', (231, 231), color=(rd(), rd(), rd()))
-        img.save(f'solid_pic_tmp.png')
-        await session.send(
-            rf'[CQ:image,file=file:///{getcwd()}\solid_pic_tmp.png]')
-    else:
-        print('来源不明，pass')
+def gen_solid_pic(args: List[str] = None):
+    color = [randint(0, 255) for _ in range(3)]
+    size = [randint(11, 231) for _ in range(2)]
+
+    if args:
+        for i, v in enumerate(args[:3]):
+            try:
+                color[i] = int(v, base=0) % 255
+            except ValueError:
+                continue
+        for i, v in enumerate(args[3:]):
+            try:
+                size[i] = int(v, base=0) % 220 + 11
+            except ValueError:
+                continue
+
+    img = Image.new('RGB', size=tuple(size), color=tuple(color))
+    img.save(solid_pic_path)

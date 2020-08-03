@@ -124,10 +124,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# idea
+.idea/
+
 # other
-img_daily/
-img_gkd/
-word_cloud/
 config.py
-solid_pic_tmp.png
-safe_exec.py
+temp/

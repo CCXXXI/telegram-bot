@@ -1,18 +1,21 @@
-SUPERUSERS = [12345]
-HOST = '127.0.0.1'
-PORT = 8080
-COMMAND_START = {''}
+from datetime import datetime
 
-group_white_list = {
-    12345,  # 示例
-}
+# noinspection SpellCheckingInspection
+token = '123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11'
+safe_exec_api = 'http://example.com/safe_exec_api'
 
-user_white_list = {
-    12345,  # 示例
-}
 
-word_cloud_groups = {
-    12345: "文本",  # 示例
-}
+class ImgApi:
+    def __init__(self, url: str):
+        self.url = url
+        self.sep = '?' if '?' not in self.url else '&'
 
-dalao_delta_groups = group_white_list.copy()
+    def get(self) -> str:
+        return f"{self.url}{self.sep}timestamp={datetime.now().timestamp()}"
+
+
+api_url_list = [
+    'http://example.com/image_api',
+]
+
+img_api_list = list(map(ImgApi, api_url_list))

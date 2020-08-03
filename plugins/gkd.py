@@ -1,22 +1,31 @@
-from os import listdir, getcwd
+import logging
+from os import listdir
 from random import choice
 
-from nonebot import on_command, CommandSession
+from telegram import Update
+from telegram.error import BadRequest, TimedOut
+from telegram.ext import CallbackContext
 
-from config import group_white_list, user_white_list
+from config import img_api_list
+from tools.plugin_tools import on_cmd
+
+local_img_path = 'images/'
 
 
-@on_command('gkd')
-async def gkd_caller(session: CommandSession):
-    if session.event.group_id in group_white_list or session.event.user_id in user_white_list:
-        await gkd_local(session)
+@on_cmd
+def gkd(update: Update, context: CallbackContext):
+    if context.args:
+        api = img_api_list[hash(tuple(context.args)) % len(img_api_list)]
+        try:
+            update.message.reply_photo(api.get())
+        except BadRequest:
+            t = 'api炸啦: ' + api.url
+            logging.info(t)
+            update.message.reply_text(t)
+        except TimedOut:
+            t = 'TimedOut: ' + api.url
+            logging.info(t)
+            update.message.reply_text(t)
     else:
-        print('来源不明，pass')
-
-
-async def gkd_local(session: CommandSession):
-    img_name = choice(listdir('img_gkd'))
-    img_path = getcwd() + rf'\img_gkd\{img_name}'
-    print(f'{img_path=}')
-    msg = f'[CQ:image,file=file:///{img_path}]'
-    await session.send(msg)
+        img_path = local_img_path + choice(listdir(local_img_path))
+        update.message.reply_photo(open(img_path, 'rb'))

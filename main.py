@@ -1,12 +1,24 @@
-from os import path, getcwd
+import logging
 
-import nonebot
+from telegram.ext import Updater
 
-import config
+from config import token
+from tools import plugin_tools
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+updater = Updater(
+    token=token,
+    use_context=True)  # `use_context=True` only needed for version 12
+
+plugin_tools.load_plugins()
+
+for cmd in plugin_tools.cmd_list:
+    updater.dispatcher.add_handler(cmd)
+    logging.info(f'command added: {cmd.command}')
 
 if __name__ == '__main__':
-    print(f'运行目录：{getcwd()}')
-    nonebot.init(config)
-    nonebot.load_plugins(path.join(path.dirname(__file__), 'plugins'),
-                         'plugins')
-    nonebot.run()
+    updater.start_polling()
+    logging.info('updater running')
+    updater.idle()
