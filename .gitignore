@@ -128,7 +128,7 @@ dmypy.json
 .idea/
 
 # other
-img_daily/
-img_gkd/
 config.py
-solid_pic_tmp.png
+*.jpg
+*.png
+temp/

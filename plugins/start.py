@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from plugin_tools import on_cmd
+from tools.plugin_tools import on_cmd
 
 
 # noinspection PyUnusedLocal

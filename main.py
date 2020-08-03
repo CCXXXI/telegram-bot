@@ -2,8 +2,8 @@ import logging
 
 from telegram.ext import Updater
 
-import plugin_tools
 from config import token
+from tools import plugin_tools
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

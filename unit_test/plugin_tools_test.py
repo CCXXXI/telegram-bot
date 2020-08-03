@@ -6,7 +6,7 @@ chdir(pardir)
 
 class TestPluginTools(unittest.TestCase):
     def test_plugin_tools(self):
-        import plugin_tools
+        from tools import plugin_tools
         plugin_tools.load_plugins()
         for cmd in plugin_tools.cmd_list:
             print(*cmd.command)

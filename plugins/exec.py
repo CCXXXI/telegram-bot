@@ -2,9 +2,9 @@ import requests
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from cmd_tools import str_arg
 from config import safe_exec_api
-from plugin_tools import on_cmd
+from tools.cmd_tools import str_arg
+from tools.plugin_tools import on_cmd
 
 
 # noinspection PyUnusedLocal
