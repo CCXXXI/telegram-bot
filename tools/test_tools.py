@@ -1,8 +1,11 @@
 import unittest
 from os import chdir, pardir
+from os import remove
+from os.path import exists
 
 from plugins.eval import safe_eval
 from plugins.exec import safe_exec
+from plugins.solid_pic import gen_solid_pic, solid_pic_path
 from tools import plugin_tools
 
 chdir(pardir)
@@ -23,6 +26,14 @@ class TestEvalExec(unittest.TestCase):
         self.assertEqual(safe_exec('print(1 + 1)'), '2')
         self.assertEqual(safe_exec("__import__('os').system('whoami')"),
                          'RuntimeError')
+
+
+class TestPicture(unittest.TestCase):
+    def test_solid_pic(self):
+        if exists(solid_pic_path):
+            remove(solid_pic_path)
+        gen_solid_pic()
+        self.assertTrue(exists(solid_pic_path))
 
 
 if __name__ == '__main__':
