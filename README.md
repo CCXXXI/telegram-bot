@@ -1,11 +1,3 @@
-# qq_bot
- A qq bot based on nonebot, just for fun.
+# telegram_bot
 
-## gitignore
-
-以下内容被ignore，但缺少则不可运行
-
-* `img_daily/` `img_gkd/`：放置图片
-* `word_cloud/`：字体文件`font.ttf`、屏蔽词`stopwords.txt`、词云模板`template.png`
-* `config.py`：参考[config.example.py](./config.example.py)
-* `safe_exec.py`：【数据删除】
+A telegram bot based on [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot), as a tribute for the [qq bot](https://github.com/CCXXXI/telegram_bot/releases/tag/qq_bot).
