@@ -3,6 +3,9 @@ from os import chdir, pardir
 from os import remove
 from os.path import exists
 
+import requests
+
+from config import img_api_list
 from plugins.eval import safe_eval
 from plugins.exec import safe_exec
 from plugins.solid_pic import gen_solid_pic, solid_pic_path
@@ -34,6 +37,13 @@ class TestPicture(unittest.TestCase):
             remove(solid_pic_path)
         gen_solid_pic()
         self.assertTrue(exists(solid_pic_path))
+
+
+class TestImgApi(unittest.TestCase):
+    def test_img_api(self):
+        for api in img_api_list:
+            r = requests.get(api.get())
+            self.assertEqual(r.status_code, 200)
 
 
 if __name__ == '__main__':

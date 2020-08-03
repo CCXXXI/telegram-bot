@@ -8,7 +8,7 @@ safe_exec_api = 'http://example.com/safe_exec_api'
 class ImgApi:
     def __init__(self, url: str):
         self.url = url
-        self.sep = {'?' if '?' not in self.url else '&'}
+        self.sep = '?' if '?' not in self.url else '&'
 
     def get(self) -> str:
         return f"{self.url}{self.sep}timestamp={datetime.now().timestamp()}"
