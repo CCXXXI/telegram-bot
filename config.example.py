@@ -19,3 +19,7 @@ api_url_list = [
 ]
 
 img_api_list = list(map(ImgApi, api_url_list))
+
+cheater_list = [
+    'cheater语录',
+]
