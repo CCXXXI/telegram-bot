@@ -13,6 +13,10 @@ def on_cmd(func):
     return func
 
 
+def add_cmd(cmd: str, func):
+    cmd_list.append(CommandHandler(cmd, func))
+
+
 def load_plugins():
     """遍历import所有plugins，以生成cmd_list"""
     for filename in listdir('plugins'):
