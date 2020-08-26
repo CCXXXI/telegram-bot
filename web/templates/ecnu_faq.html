@@ -2578,12 +2578,12 @@
     <div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list">
         {% for qa in faqs -%}
         <span class="md-toc-item md-toc-h2" role="listitem"><a class="md-toc-inner"
-                                                               href="#q{{loop.index}}">{{qa[0]}}</a></span>
+                                                               href="#q{{loop.index0}}">{{qa[0]}}</a></span>
         {%- endfor %}
     </p></div>
     {% for qa in faqs -%}
-    <h2><a class="md-header-anchor" name="q{{loop.index}}"></a><span>{{qa[0]}}</span></h2>
-    <p><span>{{qa[1]}}</span></p>
+    <h2><a class="md-header-anchor" name="q{{loop.index0}}"></a><span>{{qa[0]}}</span></h2>
+    <span>{{qa[1]|safe}}</span>
     {%- endfor %}
 </body>
 </html>
