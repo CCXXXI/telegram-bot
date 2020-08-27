@@ -6,8 +6,8 @@ from markdown import markdown as md
 app = Flask(__name__)
 
 
-@app.route('/ecnu')
-def ecnu_faq():
+@app.route('/test')
+def ecnu_faq_from_json():
     faq_list = json.load(open('ecnu_faq.json', encoding='utf-8'))
     for faq in faq_list:
         faq[1] = md(faq[1])
