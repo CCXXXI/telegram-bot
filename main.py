@@ -5,12 +5,11 @@ from telegram.ext import Updater
 from config import token
 from tools import plugin_tools
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-updater = Updater(
-    token=token,
-    use_context=True)  # `use_context=True` only needed for version 12
+updater = Updater(token=token)
 
 plugin_tools.load_plugins()
 
