@@ -128,5 +128,5 @@ dmypy.json
 .idea/
 
 # other
-config.py
+secret.py
 temp/
