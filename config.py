@@ -1,8 +1,7 @@
+import os
 from datetime import datetime
 
-import secret
-
-token = secret.token
+token = os.environ['TOKEN']
 
 
 class ImgApi:
