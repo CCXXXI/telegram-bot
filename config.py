@@ -1,7 +1,14 @@
 import os
 from datetime import datetime
 
-token = os.environ['TOKEN']
+token = None
+if 'TOKEN' in os.environ:
+    token = os.environ['TOKEN']
+elif os.path.isfile('token'):
+    with open('token') as f:
+        token = f.read().strip()
+else:
+    raise AssertionError
 
 
 class ImgApi:
