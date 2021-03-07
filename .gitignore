@@ -128,5 +128,4 @@ dmypy.json
 .idea/
 
 # other
-temp/
 token
