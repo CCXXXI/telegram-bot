@@ -7,7 +7,7 @@ from tools import plugin_tools
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    format='%(asctime)s - %(levelname)-5s - %(name)s - %(message)s')
 
 updater = Updater(token=token)
 
