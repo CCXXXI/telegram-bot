@@ -1,4 +1,4 @@
-# telegram_bot
+# telegram bot
 ![GitHub](https://img.shields.io/github/license/CCXXXI/telegram_bot)
 ![GitHub last commit](https://img.shields.io/github/last-commit/CCXXXI/telegram_bot)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
