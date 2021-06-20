@@ -54,7 +54,7 @@ def safe_exec(input_code: str) -> str:
         return ret
 
     if ret.startswith("'import site' failed"):
-        ret = ret[len("'import site' failed") :]
+        ret = ret[len("'import site' failed"):]
     ret = re.sub(r"\s+", " ", ret).strip()
 
     if ret == "[Subprocess killed by SIGTERM]":

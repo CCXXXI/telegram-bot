@@ -27,7 +27,8 @@ class TestEvalExec(unittest.TestCase):
 
     def test_safe_exec(self):
         self.assertEqual(safe_exec("print(1 + 1)"), "2")
-        self.assertEqual(safe_exec("__import__('os').system('whoami')"), "RuntimeError")
+        self.assertEqual(
+            safe_exec("__import__('os').system('whoami')"), "RuntimeError")
 
 
 class TestPicture(unittest.TestCase):
