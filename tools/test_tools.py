@@ -22,13 +22,12 @@ class TestPluginTools(unittest.TestCase):
 
 class TestEvalExec(unittest.TestCase):
     def test_safe_eval(self):
-        self.assertEqual(safe_eval(str({2, 0, 7, 7})), '{0, 2, 7}')
-        self.assertEqual(safe_eval('1 + 1'), 'operator no')
+        self.assertEqual(safe_eval(str({2, 0, 7, 7})), "{0, 2, 7}")
+        self.assertEqual(safe_eval("1 + 1"), "operator no")
 
     def test_safe_exec(self):
-        self.assertEqual(safe_exec('print(1 + 1)'), '2')
-        self.assertEqual(safe_exec("__import__('os').system('whoami')"),
-                         'RuntimeError')
+        self.assertEqual(safe_exec("print(1 + 1)"), "2")
+        self.assertEqual(safe_exec("__import__('os').system('whoami')"), "RuntimeError")
 
 
 class TestPicture(unittest.TestCase):
@@ -46,5 +45,5 @@ class TestImgApi(unittest.TestCase):
             self.assertEqual(r.status_code, 200)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
