@@ -6,8 +6,8 @@ from config import token
 from tools import plugin_tools
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)-5s - %(name)s - %(message)s"
-)
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)-5s - %(name)s - %(message)s")
 
 updater = Updater(token=token)
 
