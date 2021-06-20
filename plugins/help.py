@@ -8,4 +8,5 @@ from tools.plugin_tools import on_cmd
 @on_cmd
 def help_(update: Update, context: CallbackContext):
     update.message.reply_text(
-        "https://github.com/CCXXXI/telegram_bot/tree/master/plugins")
+        "https://github.com/CCXXXI/telegram_bot/tree/master/plugins"
+    )

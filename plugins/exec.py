@@ -35,8 +35,10 @@ def safe_exec(input_code: str) -> str:
     logging.debug("input: " + input_code)
     with open(tmp_path + "/untrusted.py", "w") as f:
         f.write(input_code)
-    cmd_prefix = (f"pypy {interact_path} --heapsize=256m --timeout=1"
-                  f" --tmp={tmp_path} {sandbox_path}")
+    cmd_prefix = (
+        f"pypy {interact_path} --heapsize=256m --timeout=1"
+        f" --tmp={tmp_path} {sandbox_path}"
+    )
     cmd_suffix = f"<{in_file} &>{out_file}"
     os.system(" ".join((cmd_prefix, untrusted_file, cmd_suffix)))
     with open(out_file) as f:
@@ -52,7 +54,7 @@ def safe_exec(input_code: str) -> str:
         return ret
 
     if ret.startswith("'import site' failed"):
-        ret = ret[len("'import site' failed"):]
+        ret = ret[len("'import site' failed") :]
     ret = re.sub(r"\s+", " ", ret).strip()
 
     if ret == "[Subprocess killed by SIGTERM]":
